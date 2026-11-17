@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>ساحة التحدي الرياضية (تميزي بجدولي)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@700&display=swap');
+
+body {
+    font-family: 'Cairo', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #fdf2f8 0%, #fbcfe8 100%);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.card {
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(190, 24, 93, 0.12);
+    border: 2px solid #fce7f3;
+}
+
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed #fce7f3;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.school-badge {
+    font-size: 14px;
+    font-weight: 700;
+    color: #831843;
+    background: #fdf2f8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #fbcfe8;
+}
+
+.teacher-badge {
+    font-size: 15px;
+    font-weight: 700;
+    color: #9d174d;
+    background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+    padding: 6px 16px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+h1 {
+    text-align: center;
+    color: #be185d;
+    margin: 10px 0 20px 0;
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    margin: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.primary {
+    background: linear-gradient(135deg, #db2777, #be185d);
+    color: #fff;
+}
+
+.outline {
+    background: #fff;
+    border: 2px solid #db2777;
+    color: #db2777;
+}
+
+.outline.active {
+    background: #db2777;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.round-indicator {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+    color: #d97706;
+    background: #fef3c7;
+    padding: 6px 18px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 0 auto 10px auto;
+}
+
+.big {
+    font-size: 64px;
+    font-weight: 900;
+    text-align: center;
+    margin: 15px 0;
+    color: #1f2937;
+    background: #fdf2f8;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px dashed #f472b6;
+    letter-spacing: 2px;
+}
+
+.choices-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.choice-btn {
+    font-size: 28px;
+    padding: 18px 45px;
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    color: white;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    font-weight: 900;
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.3);
+    transition: all 0.2s;
+}
+
+.choice-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #4338ca, #3730a3);
+}
+
+.student-winner-box {
+    background: #f0fdf4;
+    border: 2px dashed #22c55e;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.winner-btn {
+    font-size: 22px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    font-weight: 900;
+    box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
+    transition: all 0.2s;
+    margin: 8px;
+}
+
+.winner-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #047857, #059669);
+}
+
+.timer {
+    text-align: center;
+    color: #4b5563;
+    font-size: 20px;
+    font-weight: 700;
+    background: #f3f4f6;
+    padding: 8px 20px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.timer-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.points {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    color: #be185d;
+    margin-top: 15px;
+    background: #fff1f2;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.dashboard {
+    margin-top: 40px;
+    border-top: 3px solid #fce7f3;
+    padding-top: 25px;
+}
+
+.section-title {
+    color: #be185d;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.podium-box {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.podium-card {
+    background: linear-gradient(135deg, #fff, #fdf2f8);
+    border: 2px solid #f472b6;
+    border-radius: 16px;
+    padding: 15px 25px;
+    text-align: center;
+    min-width: 150px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.queen-card {
+    background: linear-gradient(135deg, #fef08a, #facc15);
+    color: #713f12;
+    border: 3px solid #eab308;
+    border-radius: 20px;
+    padding: 20px 30px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 450px;
+    box-shadow: 0 10px 25px rgba(234, 179, 8, 0.4);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #fbcfe8;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #fdf2f8;
+    color: #be185d;
+    font-weight: 900;
+    font-size: 16px;
+}
+
+td {
+    background: #fff;
+    border-top: 1px solid #fbcfe8;
+    font-size: 16px;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 6px 10px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+}
+
+#certificateView {
+    display: none;
+    max-width: 900px;
+    margin: 20px auto;
+    background: #fff;
+    border: 12px solid #d4af37;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.4);
+    position: relative;
+    background: radial-gradient(circle, #ffffff 0%, #fffdf0 100%);
+    text-align: center;
+}
+
+.cert-border {
+    border: 3px double #b8860b;
+    padding: 30px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.cert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #78350f;
+}
+
+.cert-title {
+    font-family: 'Amiri', serif;
+    font-size: 42px;
+    color: #92400e;
+    margin: 25px 0 15px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.cert-badge {
+    font-size: 28px;
+    color: #be185d;
+    font-weight: 900;
+    margin: 15px 0;
+}
+
+.cert-name {
+    font-size: 38px;
+    font-weight: 900;
+    color: #1e3a8a;
+    border-bottom: 3px dashed #3b82f6;
+    display: inline-block;
+    padding: 5px 30px;
+    margin: 15px 0;
+}
+
+.cert-body {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #374151;
+    margin: 20px 0;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 20px;
+    font-weight: bold;
+    color: #831843;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    animation: fall 3s infinite linear;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(800px) rotate(360deg); opacity: 0; }
+}
+
+@media print {
+    body * { visibility: hidden; }
+    #certificateView, #certificateView * { visibility: visible; }
+    #certificateView { position: absolute; left: 0; top: 0; width: 100%; border-width: 6px; }
+    .no-print { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="mainApp" class="card">
+  <div class="header-info">
+    <div class="school-badge">🏫 مجمع القاعدة – برنية ٥٣٣</div>
+    <div class="teacher-badge">✨ إعداد المعلمة / سهام سعيد الزهراني ✨</div>
+  </div>
+
+  <h1>🎮 ساحة التحدي الرياضية (تميزي بجدولي)</h1>
+
+  <div class="row">
+    <button class="btn outline" id="soundBtn" onclick="toggleSound()">🔊 الصوت: مفعل</button>
+    <button class="btn primary" style="background: linear-gradient(135deg, #059669, #10b981);" onclick="manualSaveData()">💾 حفظ البيانات الآن</button>
+  </div>
+
+  <div class="row">
+    <button class="btn outline active" id="mode-mul" onclick="setMode('mul', this)">ضرب</button>
+    <button class="btn outline" id="mode-div" onclick="setMode('div', this)">قسمة</button>
+    <button class="btn outline active" id="lvl-easy" onclick="setLevel('easy', this)">سهل (رقم × رقم)</button>
+    <button class="btn outline" id="lvl-med" onclick="setLevel('med', this)">متوسط (رقمين × رقم)</button>
+    <button class="btn outline" id="lvl-hard" onclick="setLevel('hard', this)">صعب (رقمين × رقمين/3)</button>
+  </div>
+
+  <div class="row">
+    <button class="btn outline" style="background:#e0e7ff; color:#3730a3; border-color:#818cf8; font-size:16px;" onclick="pickRandomPair()">🎲 اختيار عشوائي للثنائي</button>
+    <button class="btn primary" style="font-size: 18px; padding: 12px 30px;" onclick="start()">🎯 بدء التحدي</button>
+  </div>
+
+  <div class="points" id="points"></div>
+
+  <div id="winnerSelectionBox" class="student-winner-box" style="display:none;">
+    <div style="font-size: 18px; font-weight: 900; color: #065f46; margin-bottom: 10px;">
+      🌟 اضغطي على اسم الطالبة التي أجابت صح أولاً لإعطائها النقطة:
+    </div>
+    <div id="winnerButtonsContainer"></div>
+  </div>
+
+  <div style="text-align:center; margin-top:15px;">
+    <div id="roundDisplay" class="round-indicator" style="display:none;">الجولة 1</div>
+  </div>
+
+  <div class="big" id="q">— اختيار الثنائي للبدء —</div>
+
+  <div class="choices-row" id="choicesContainer" style="display:none;"></div>
+
+  <div class="timer-container" id="timerContainer">
+    <div class="timer">⏱️ الوقت المتبقي: <span id="t">120</span> ثانية</div>
+  </div>
+
+  <div class="dashboard">
+    <div id="queenContainer"></div>
+
+    <div class="section-title">🏆 المراكز الثلاثة الأولى</div>
+    <div class="podium-box" id="podiumContainer"></div>
+
+    <div class="section-title">📋 سجل درجات الطالبات وإدارتها (إضافة وتعديل يدوي)</div>
+    <div class="row">
+      <input type="text" id="newStudentName" placeholder="اسم الطالبة الجديدة">
+      <button class="btn primary" onclick="addStudent()">➕ إضافة طالبة</button>
+      <button class="btn outline" style="background:#ecfdf5; color:#065f46; border-color:#34d399;" onclick="exportData()">💾 تصدير للكمبيوتر</button>
+      <button class="btn outline" style="background:#eff6ff; color:#1e40af; border-color:#60a5fa;" onclick="document.getElementById('importFile').click()">📂 استيراد ملف</button>
+      <input type="file" id="importFile" style="display:none" onchange="importData(event)">
+    </div>
+
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>اسم الطالبة</th>
+            <th>النقاط المسجلة</th>
+            <th>تحكم المعلمة (إضافة / خصم)</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="studentsTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="certificateView">
+    <div id="confettiContainer"></div>
+    <div class="cert-border">
+        <div class="cert-header">
+            <div>المملكة العربية السعودية<br>مجمع القاعدة – برنية ٥٣٣</div>
+            <div style="font-size:36px;">👑</div>
+            <div>مادة الرياضيات<br>إعداد: سهام سعيد الزهراني</div>
+        </div>
+
+        <div class="cert-title">📜 شهادة شكر وتقدير 📜</div>
+        <div class="cert-badge">✨ ملكة الضرب والقسمة ✨</div>
+
+        <div class="cert-body">
+            يسر إدارة المجمع والمعلمة إهداء هذه الشهادة للطالبة المتميزة والبارعة:
+        </div>
+
+        <div class="cert-name" id="certStudentName">اسم الطالبة</div>
+
+        <div class="cert-body">
+            وذلك لتفوقها وتميزها الرائع في مسابقة <strong>"ساحة التحدي الرياضية (تميزي بجدولي)"</strong><br>
+            وحصولها على المركز الأول برصيد <strong id="certStudentPoints" style="color:#be185d;">0</strong> نقطة.
+            <br>مع أطيب أمنياتنا لها بدوام التوفيق والنجاح. 🌟
+        </div>
+
+        <div class="cert-footer">
+            <div>معلمة المادة:<br>سهام سعيد الزهراني 🌸</div>
+            <div>ختم التتميز الرياضي 🎖️</div>
+        </div>
+    </div>
+
+    <div class="row no-print" style="margin-top:25px;">
+        <button class="btn primary" style="font-size:16px; background:#2563eb;" onclick="window.print()">🖨️ طباعة الشهادة / حفظ PDF</button>
+        <button class="btn outline" style="font-size:16px;" onclick="closeCertificate()">🔙 العودة للمسابقة</button>
+    </div>
+</div>
+
+<script>
+let defaultStudents = { "سارة": 0, "ريم": 0, "نورة": 0, "ليان": 0, "هند": 0, "فاطمة": 0 };
+let studentsData = JSON.parse(localStorage.getItem('math_students_scores')) || defaultStudents;
+let usedStudents = new Set(JSON.parse(localStorage.getItem('math_used_students')) || []);
+
+let pair = [], a, b, correctAnswer, t = 120, level = 'easy', mode = 'mul', sound = true, timer;
+let currentRound = 1;
+let maxRounds = 3;
+let usedQuestions = new Set();
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function autoSave() {
+    localStorage.setItem('math_students_scores', JSON.stringify(studentsData));
+    localStorage.setItem('math_used_students', JSON.stringify([...usedStudents]));
+}
+
+function manualSaveData() {
+    autoSave();
+    alert("✅ تم حفظ درجات وبيانات الطالبات بنجاح!");
+}
+
+function playCheers() {
+    if (!sound) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    let now = audioCtx.currentTime;
+    [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+        let osc = audioCtx.createOscillator();
+        let gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + i * 0.1);
+        gain.gain.setValueAtTime(0.2, now + i * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.1);
+        osc.stop(now + i * 0.1 + 0.3);
+    });
+}
+
+function playLossSound() {
+    if (!sound) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    let now = audioCtx.currentTime;
+    [220, 196, 164.81].forEach((freq, i) => {
+        let osc = audioCtx.createOscillator();
+        let gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + i * 0.2);
+        gain.gain.setValueAtTime(0.2, now + i * 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.2 + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.2);
+        osc.stop(now + i * 0.2 + 0.3);
+    });
+}
+
+function playVictoryMusic() {
+    if (!sound) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    let now = audioCtx.currentTime;
+    let notes = [
+        {f: 523.25, d: 0.15, t: 0.0},
+        {f: 523.25, d: 0.15, t: 0.18},
+        {f: 523.25, d: 0.15, t: 0.36},
+        {f: 659.25, d: 0.40, t: 0.54},
+        {f: 783.99, d: 0.20, t: 0.95},
+        {f: 1046.50, d: 0.80, t: 1.18}
+    ];
+
+    notes.forEach(n => {
+        let osc = audioCtx.createOscillator();
+        let gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(n.f, now + n.t);
+        gain.gain.setValueAtTime(0.25, now + n.t);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + n.t);
+        osc.stop(now + n.t + n.d);
+    });
+}
+
+function toggleSound() {
+    sound = !sound;
+    document.getElementById('soundBtn').innerText = sound ? "🔊 الصوت: مفعل" : "🔇 الصوت: معطل";
+}
+
+function setMode(m, el) {
+    mode = m;
+    document.querySelectorAll('#mode-mul, #mode-div').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    usedQuestions.clear();
+}
+
+function setLevel(l, el) {
+    level = l;
+    document.querySelectorAll('#lvl-easy, #lvl-med, #lvl-hard').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    usedQuestions.clear();
+}
+
+function pickRandomPair() {
+    let allStudents = Object.keys(studentsData);
+    if(allStudents.length < 2) {
+        alert("يرجى إدخال طالبات أكثر في القائمة أولاً!");
+        return;
+    }
+
+    let available = allStudents.filter(name => !usedStudents.has(name));
+
+    if (available.length < 2) {
+        usedStudents.clear();
+        available = [...allStudents];
+        alert("🔄 اكتملت مشاركة جميع الطالبات! ستبدأ دورة جديدة لاختيار الطالبات.");
+    }
+
+    let shuffled = [...available].sort(() => 0.5 - Math.random());
+    pair = shuffled.slice(0, 2);
+
+    pair.forEach(student => usedStudents.add(student));
+    autoSave();
+
+    currentRound = 1;
+    renderPairDisplay();
+}
+
+function start() {
+    if(pair.length < 2) {
+        pickRandomPair();
+    }
+    if(pair.length < 2) return;
+    currentRound = 1;
+    usedQuestions.clear();
+    next();
+}
+
+function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function next() {
+    clearInterval(timer);
+
+    maxRounds = (level === 'easy') ? 3 : 2;
+    
+    if (currentRound > maxRounds) {
+        document.getElementById('q').innerText = "🏁 انتهى التحدي لهذا الثنائي!";
+        document.getElementById('choicesContainer').style.display = 'none';
+        document.getElementById('winnerSelectionBox').style.display = 'none';
+        document.getElementById('roundDisplay').style.display = 'none';
+        document.getElementById('timerContainer').style.display = 'none';
+        alert(`انتهت الجولات (${maxRounds}) لهذا الثنائي (${pair.join(' و ')}) بنجاح! اضغط اختيار عشوائي للثنائي الجديد.`);
+        return;
+    }
+
+    document.getElementById('winnerSelectionBox').style.display = 'none';
+    document.getElementById('roundDisplay').innerText = `الجولة ${currentRound} من ${maxRounds}`;
+    document.getElementById('roundDisplay').style.display = 'inline-block';
+
+    let questionKey = "";
+    let x, y, maxAttempt = 200;
+    
+    do {
+        if(level === 'easy') {
+            x = rand(1, 9);
+            y = rand(1, 9);
+        } else if(level === 'med') {
+            x = rand(10, 99);
+            y = rand(2, 9);
+        } else {
+            if(Math.random() > 0.5) {
+                x = rand(10, 99);
+                y = rand(10, 99);
+            } else {
+                x = rand(10, 99);
+                y = rand(100, 999);
+            }
+        }
+
+        if(mode === 'div') {
+            let product = x * y;
+            questionKey = `${product}÷${x}`;
+            a = product;
+            b = x;
+            correctAnswer = y;
+        } else {
+            questionKey = `${x}×${y}`;
+            a = x;
+            b = y;
+            correctAnswer = x * y;
+        }
+        maxAttempt--;
+    } while(usedQuestions.has(questionKey) && maxAttempt > 0);
+
+    usedQuestions.add(questionKey);
+    document.getElementById('q').innerText = `${a} ${mode === 'mul' ? '×' : '÷'} ${b}`;
+    
+    let wrongAnswer;
+    do {
+        let offset = rand(1, Math.max(3, Math.floor(correctAnswer * 0.2)));
+        wrongAnswer = Math.random() > 0.5 ? correctAnswer + offset : Math.max(0, correctAnswer - offset);
+    } while(wrongAnswer === correctAnswer);
+
+    let choices = [correctAnswer, wrongAnswer].sort(() => 0.5 - Math.random());
+    
+    let choicesHtml = choices.map(val => `
+        <button class="choice-btn" onclick="checkAnswer(${val})">${val}</button>
+    `).join('');
+    
+    document.getElementById('choicesContainer').innerHTML = choicesHtml;
+    document.getElementById('choicesContainer').style.display = 'flex';
+
+    if (level === 'easy') {
+        document.getElementById('timerContainer').style.display = 'block';
+        t = 120;
+        document.getElementById('t').innerText = t;
+        
+        timer = setInterval(() => {
+            if (--t <= 0) {
+                clearInterval(timer);
+                playLossSound();
+                alert("انتهى الوقت!");
+                currentRound++;
+                next();
+            }
+            document.getElementById('t').innerText = t;
+        }, 1000);
+    } else {
+        document.getElementById('timerContainer').style.display = 'none';
+    }
+}
+
+function checkAnswer(selectedVal) {
+    clearInterval(timer);
+
+    if(selectedVal === correctAnswer) {
+        playCheers();
+        let btnContainer = document.getElementById('winnerButtonsContainer');
+        btnContainer.innerHTML = pair.map(name => `
+            <button class="winner-btn" onclick="awardPointTo('${name}')">👩‍🎓 الطالبة: ${name}</button>
+        `).join('');
+        document.getElementById('winnerSelectionBox').style.display = 'block';
+    } else {
+        playLossSound();
+        alert(`إجابة خاطئة! ❌ الإجابة الصحيحة هي: ${correctAnswer}`);
+        currentRound++;
+        updateUI();
+        setTimeout(() => {
+            next();
+        }, 500);
+    }
+}
+
+function awardPointTo(studentName) {
+    studentsData[studentName] = (studentsData[studentName] || 0) + 1;
+    alert(`👏 أحسنتِ! تم إضافة نقطة للطالبة المتميزة: ${studentName}`);
+    document.getElementById('winnerSelectionBox').style.display = 'none';
+    currentRound++;
+    updateUI();
+    setTimeout(() => {
+        next();
+    }, 300);
+}
+
+function renderPairDisplay() {
+    document.getElementById('points').innerHTML = `التنافس الحالي بين الثنائي: ` + pair.join(' ⚔️ ');
+}
+
+function adjustScore(name, amount) {
+    studentsData[name] = Math.max(0, (studentsData[name] || 0) + amount);
+    updateUI();
+}
+
+function updateUI() {
+    autoSave();
+    if(pair.length >= 2) renderPairDisplay();
+    
+    let sortedStudents = Object.entries(studentsData).sort((a,b) => b[1] - a[1]);
+    
+    let queenContainer = document.getElementById('queenContainer');
+    if(sortedStudents.length > 0 && sortedStudents[0][1] > 0) {
+        let queenName = sortedStudents[0][0];
+        let queenPts = sortedStudents[0][1];
+        
+        queenContainer.innerHTML = `
+            <div class="queen-card">
+                <div style="font-size:18px; font-weight:900;">👑 ملكة التحدي الرياضي 👑</div>
+                <div style="font-size:28px; font-weight:900; margin-top:8px;">${queenName}</div>
+                <div style="font-size:16px; margin-top:4px;">برصيد: ${queenPts} نقطة</div>
+                <button class="btn primary" style="margin-top:12px; background:#854d0e; border:1px solid #facc15;" onclick="showCertificate('${queenName}', ${queenPts})">🎓 عرض شهادة شكر وتقدير الملكة</button>
+            </div>
+        `;
+    } else {
+        queenContainer.innerHTML = `
+            <div class="queen-card" style="background:#f3f4f6; border-color:#d1d5db; color:#6b7280; animation:none;">
+                <div style="font-size:16px; font-weight:700;">👑 ملكة التحدي الرياضي 👑</div>
+                <div style="font-size:16px; margin-top:5px;">في انتظار أول نقطة مسجلة...</div>
+            </div>
+        `;
+    }
+
+    let podiumContainer = document.getElementById('podiumContainer');
+    let medals = ["🥇 المركز الأول", "🥈 المركز الثاني", "🥉 المركز الثالث"];
+    let podiumHtml = "";
+    for(let i = 0; i < Math.min(3, sortedStudents.length); i++) {
+        podiumHtml += `
+            <div class="podium-card">
+                <div style="font-weight:bold; color:#be185d; margin-bottom:5px">${medals[i]}</div>
+                <div style="font-size:18px; font-weight:700;">${sortedStudents[i][0]}</div>
+                <div style="font-size:14px; color:#555; margin-top:4px">${sortedStudents[i][1]} نقطة</div>
+            </div>
+        `;
+    }
+    podiumContainer.innerHTML = podiumHtml;
+
+    let tbody = document.getElementById('studentsTableBody');
+    tbody.innerHTML = sortedStudents.map(([name, pts]) => `
+        <tr>
+            <td><strong>${name}</strong></td>
+            <td><input type="number" value="${pts}" onchange="updateScore('${name}', this.value)" style="width:70px"></td>
+            <td>
+                <button class="btn primary" style="padding:4px 10px; font-size:12px;" onclick="adjustScore('${name}', 1)">➕ إضافة درجة</button>
+                <button class="btn outline" style="padding:4px 10px; font-size:12px; color:#b91c1c; border-color:#f87171;" onclick="adjustScore('${name}', -1)">➖ خصم درجة</button>
+            </td>
+            <td>
+                <button class="btn outline" style="padding:4px 8px; font-size:12px; color:#dc2626; border-color:#fca5a5;" onclick="deleteStudent('${name}')">حذف</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function showCertificate(name, points) {
+    document.getElementById('certStudentName').innerText = name;
+    document.getElementById('certStudentPoints').innerText = points;
+
+    document.getElementById('mainApp').style.display = 'none';
+    document.getElementById('certificateView').style.display = 'block';
+
+    playVictoryMusic();
+    createConfetti();
+}
+
+function closeCertificate() {
+    document.getElementById('certificateView').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    document.getElementById('confettiContainer').innerHTML = "";
+}
+
+function createConfetti() {
+    let container = document.getElementById('confettiContainer');
+    container.innerHTML = "";
+    let colors = ['#f43f5e', '#ec4899', '#d946ef', '#8b5cf6', '#eab308', '#10b981', '#3b82f6'];
+
+    for (let i = 0; i < 35; i++) {
+        let conf = document.createElement('div');
+        conf.className = 'confetti';
+        conf.style.left = Math.random() * 90 + '%';
+        conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        conf.style.animationDelay = Math.random() * 2 + 's';
+        container.appendChild(conf);
+    }
+}
+
+function updateScore(name, val) {
+    studentsData[name] = Math.max(0, parseInt(val) || 0);
+    updateUI();
+}
+
+function addStudent() {
+    let input = document.getElementById('newStudentName');
+    let name = input.value.trim();
+    if(name && !(name in studentsData)) {
+        studentsData[name] = 0;
+        input.value = "";
+        updateUI();
+    } else {
+        alert("الاسم فارغ أو موجود مسبقاً!");
+    }
+}
+
+function deleteStudent(name) {
+    delete studentsData[name];
+    usedStudents.delete(name);
+    updateUI();
+}
+
+function exportData() {
+    let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(studentsData));
+    let dlAnchor = document.createElement('a');
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", "math_challenge_scores.json");
+    document.body.appendChild(dlAnchor);
+    dlAnchor.click();
+    dlAnchor.remove();
+}
+
+function importData(event) {
+    let file = event.target.files[0];
+    if (!file) return;
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            let imported = JSON.parse(e.target.result);
+            studentsData = imported;
+            usedStudents.clear();
+            updateUI();
+            alert("تم استيراد الدرجات بنجاح!");
+        } catch(err) {
+            alert("ملف غير صالح!");
+        }
+    };
+    reader.readAsText(file);
+}
+
+updateUI();
+</script>
+
+</body>
+</html>
